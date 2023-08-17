@@ -16,7 +16,11 @@ func (c *configurator) SetupFiles(ctx context.Context) error {
 		return err
 	}
 
-	return c.createEmptyIncludeConf()
+	if err := c.createEmptyIncludeConf(); err != nil {
+		return err
+	}
+
+	return c.createEmptyIncludeServerConf()
 }
 
 func (c *configurator) downloadRootHints(ctx context.Context) error {

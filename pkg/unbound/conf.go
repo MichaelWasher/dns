@@ -79,7 +79,7 @@ func generateUnboundConf(settings Settings, blacklistLines []string,
 		// Other
 		`username: "` + username + `"`,
 		`trust-anchor-file: "` + filepath.Join(unboundDir, rootKey) + `"`, // DNSSEC trust anchor file
-		`include: "` + filepath.Join(unboundDir, includeConfFilename) + `"`,
+		`include: "` + filepath.Join(unboundDir, includeServerConfFilename) + `"`,
 	}
 
 	// Access control
@@ -98,6 +98,7 @@ func generateUnboundConf(settings Settings, blacklistLines []string,
 	lines = append(lines, "server:")
 	lines = append(lines, serverLines...)
 	lines = append(lines, blacklistLines...)
+	lines = append(lines, `include: "`+filepath.Join(unboundDir, includeConfFilename)+`"`)
 
 	// Forward zone
 	lines = append(lines, "forward-zone:")
